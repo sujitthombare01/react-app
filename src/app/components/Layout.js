@@ -16,20 +16,23 @@ class Layout extends React.Component {
   clickbtn = ()=>{
     this.props.setName('Anna');
   }
-
-  render() {
-    return (
-        <div className='container'>
-        <div className="container-fluid">
-          <div className='row'>
+/*
+<div className='row'>
                <div className='col'>
                <input type='button' className='btn btn-primary' value ={this.props.user.username } onClick={this.clickbtn} />
                </div>
            </div>
 
+*/
+  render() {
+    return (
+        <div className='container'>
+        <div className="container-fluid">
+          
+
            <div className='row align-items-cente'>
                <div className='col-md-2'>
-                 
+                
                </div>
                <div className='col-md-8'>
                       <UserFormComponent/>

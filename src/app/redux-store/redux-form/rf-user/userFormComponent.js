@@ -2,10 +2,10 @@ import  React ,{Component} from "react";
 import ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 import userFormReducer from "./userFormReducer";
-//import UserForm from './rf-user-forms/userForm';
-
+import UserForm from './rf-user-forms/userForm';
+import { reset } from 'redux-form';
  
-import { Field, reduxForm } from 'redux-form'; 
+
 
 class UserFormComponent extends React.Component {
   constructor() {
@@ -13,43 +13,32 @@ class UserFormComponent extends React.Component {
  
   }
 
+ renderField = field =>{
+    return (<input type='text' {...field.input} />);
+  } 
+
 submitForms = values =>{ 
-  console.log('Here..$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+  console.log('Submited Values')
   console.log(values)
-  
+  this.props.saveUser(values);
+
 };
 
-//<UserForm onSubmit={this.submitForms} />
+//
   render() {
-
+console.log();
     return (
-      <div className='container'>
+      <div>
   
-
-         <div className='container'>
-         
-         <form onSubmit={this.props.handleSubmit(this.submitForms)}>
-           <div>
-                <label htmlFor="firstName">First Name</label>
-              
-               <Field name="username" component='input' type="text"  />
-           </div>
-         
-           <button type="submit">Submit</button>
-         </form>
-    </div>
+          <UserForm userData={this.props.userReducer} onSubmit={this.submitForms}  />
+       
       </div>
     );
   }
 }
 
 
-UserFormComponent = reduxForm({
-  // a unique name for the form
-  form: 'UserForm',
-  //initialValues : props.userData.user
-  
-})( UserFormComponent) ;
+
 
 const mapStateToProps =(state)=>{
 
@@ -60,8 +49,8 @@ const mapStateToProps =(state)=>{
 
 const mapDispatchToPros=(dispatch)=>{
 return {
-  setName  : (name)=> {
-    dispatch({type: 'SAVE_USER', value : name });
+  saveUser  : (newUser)=> {
+    dispatch({type: 'SAVE_USER', user : newUser });
   }
 };
 

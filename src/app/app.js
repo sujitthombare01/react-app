@@ -11,9 +11,9 @@ import reducers from './redux-store/appreducers';
 import  logger from 'redux-logger';
 
 
-//let store = createStore(reducers,{},applyMiddleware(logger));
+let store = createStore(reducers,{},applyMiddleware(logger));
 
-let store = createStore(reducers);
+//let store = createStore(reducers);
 
 const app = document.getElementById('app');
 ReactDOM.render(

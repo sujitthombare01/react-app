@@ -1,11 +1,11 @@
 
 import { combineReducers } from 'redux';
-import userReducer from './reducers/userReducer';
-import calciReducer from './reducers/calciReducer';
+//import userReducer from './reducers/userReducer';
+//import calciReducer from './reducers/calciReducer';
 import userFormReducer from './redux-form/rf-user/userFormReducer';
-import { reducer as fromReducer } from 'redux-form';
+import { reducer as form } from 'redux-form';
 
-const reducers = combineReducers({userReducer,calciReducer,userFormReducer,fromReducer});
-
+//const reducers = combineReducers({userReducer,calciReducer,userFormReducer,form});
+const reducers = combineReducers({userFormReducer,form});
 
 export default reducers;
