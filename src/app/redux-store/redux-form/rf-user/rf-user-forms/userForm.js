@@ -81,14 +81,14 @@ let UserForm =props =>{
 
   const submitSuccess = (result,dispatch)=>  {
       console.log('Value Submited Done..!'); 
-      dispatch(reset(UserForm));
+      dispatch(reset('UserForm'));
 
   }
 
  UserForm = connect(
     state =>({ initialValues: state.userFormReducer } ),
   null    // bind account loading action creator
-  )(UserForm)
+  )(UserForm);
 
   UserForm = reduxForm({
     // a unique name for the form

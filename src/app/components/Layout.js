@@ -1,8 +1,7 @@
 import  React ,{Component} from "react";
 import ReactDom from 'react-dom';
 import { connect } from 'react-redux';
-import userReducer from "../redux-store/reducers/userReducer";
-import Header from './Header';
+
 
 import UserFormComponent from '../redux-store/redux-form/rf-user/userFormComponent'
   
