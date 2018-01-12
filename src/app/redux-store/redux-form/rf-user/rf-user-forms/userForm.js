@@ -3,14 +3,16 @@ import ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
-const submitprop = (values)=> console.log(values);
- 
+
+const renderField = field =>{
+  return (<input type='text' {...field.input} />);
+} 
 
 let UserForm =props =>{
   
   
   const { handleSubmit } = props;
-  const { username} =props.userData.user;
+//  const { username} =props.userData.user;
 
       return (
         <div className='container'>
@@ -18,8 +20,8 @@ let UserForm =props =>{
               <form onSubmit={handleSubmit}>
                 <div>
                      <label htmlFor="firstName">First Name</label>
-           
-                    <Field name="username" component="input" type="text"  />
+                   
+                    <Field name="username" component={renderField} type="text"  />
                 </div>
               
                 <button type="submit">Submit</button>
@@ -33,7 +35,8 @@ let UserForm =props =>{
 
   UserForm = reduxForm({
     // a unique name for the form
-    form: 'UserForm'
+    form: 'UserForm',
+    //initialValues : props.userData.user
     
   })( UserForm) ;
 
