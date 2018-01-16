@@ -3,8 +3,8 @@ import ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 
 
-import UserFormComponent from '../redux-store/redux-form/rf-user/userFormComponent'
-  
+import UserFormComponent from '../redux-store/redux-form/rf-user/userFormComponent';
+import DataGrid from './components-lib/dataGrid';
 
 class Layout extends React.Component {
   constructor() {
@@ -22,6 +22,8 @@ class Layout extends React.Component {
                </div>
            </div>
 
+           
+
 */
   render() {
     return (
@@ -34,10 +36,12 @@ class Layout extends React.Component {
                 
                </div>
                <div className='col-md-8'>
-                      <UserFormComponent/>
+                      
+               <UserFormComponent/>
+                        
                </div>
                <div className='col-md-2'>
-                 
+              
                </div>
            </div>
                 
