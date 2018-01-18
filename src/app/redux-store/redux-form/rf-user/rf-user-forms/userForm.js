@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm ,reset } from 'redux-form';
 import ReactTable from 'react-table';
 import "react-table/react-table.css";
+import {withRouter} from 'react-router'
 import { required,email,number,minValue18 } from '../../../../components/components-lib/validations';
 
 
@@ -20,12 +21,14 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
 
 
 
-let UserForm =props =>{
+let UserForm =(props) =>{
  
+
   const { handleSubmit, pristine, reset, submitting } = props;
   const { user,userList } =props.userData;
-console.log(user.isEdit);
-
+  const {history,match} =props;
+  //console.log(user.isEdit);
+  console.log(match);
       return (
  
         <div>
@@ -72,49 +75,12 @@ console.log(user.isEdit);
                  <div className='col-sm-3 col-md-3'>
                     <button type="button" className='btn btn-primary btn-sm'  onClick={()=>{props.resetForm();}}>Clear</button>  
                   </div>
+                  <div className='col-sm-3 col-md-3'>
+                    <button type="button" className='btn btn-primary btn-sm'  onClick={()=>{ let url =match.url.replace('/save','');     history.push(url)}}>Back</button>  
+                  </div>
       </div>
               </form>
-              <div className='row'>
-              <ReactTable data={userList} columns={[
-                {
-                  Header: "Edit",
-                  accessor: "user.username",
-                  Cell : (row)=>(<input type='button' class='btn btn-primary btn-sm' onClick={()=>{props.edit(row.value)}} value='Edit'/>)
-                }, {
-                  Header: "Delete",
-                  accessor: "user.username",
-                  Cell : (row)=>(<input type='button' class='btn btn-danger btn-sm' onClick={()=>{props.delete(row.value)}} value='Delete'/>)
-                },
-                {
-                  Header: "First Name",
-                  accessor: "user.firstName"
-                },{
-                    Header: "Last Name",
-                    accessor: "user.lastName"
-                  },{
-                    Header: "User Name",
-                    accessor: "user.username"
-                  },
-                  {
-                    Header: "Age",
-                    accessor: "user.age"
-                  },{
-                    Header: "Email",
-                    accessor: "user.email"
-                  }]} 
-                  defaultPageSize={5}
-                  SubComponent={row => {
-                    
-                    return (
-
-                      <div style={{ padding: "20px" }}>
-                        <em>
-                        First Name  : {row.row['user.firstName']}
-                        </em>
-                    </div> )}}
-                 
-                  />
-                </div>
+             
          </div>
      
             
@@ -150,4 +116,4 @@ UserForm = connect(
 
   
 
-export default UserForm;
+export default withRouter(UserForm);

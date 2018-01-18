@@ -27,6 +27,9 @@ module.exports = {
     path: __dirname + "/src/",
     filename: "app.min.js"
   },
+ devServer :{
+historyApiFallback :true,
+  },
   plugins: debug ? [] : [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),

@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 import userFormReducer from "./userFormReducer";
 import UserForm from './rf-user-forms/userForm';
 import { reset } from 'redux-form';
- import DataGrid from './../../../components/components-lib/dataGrid';
+import UserGrid from './rf-user-forms/userGrid';
+
+
+import {BrowserRouter as Router , Route ,Link} from 'react-router-dom';
+import { Switch} from 'react-router';
 
 
 class UserFormComponent extends React.Component {
@@ -27,6 +31,7 @@ submitForms = values =>{
 editRecord = value =>{
   console.log('Edit Record')
   this.props.fetchUser(value);
+
 }
 
 deleteRecord = value =>{
@@ -43,18 +48,35 @@ resetForm=() =>{
 
 //
   render() {
-console.log();
+
+const {match} = this.props;
     return (
       <div>
-  
-          <UserForm userData={this.props.userReducer} onSubmit={this.submitForms} 
-            edit={this.editRecord} delete ={this.deleteRecord} resetForm={this.resetForm}/>
-       
+        <Router>
+          <div>
+
+            <Switch>
+               <Route  path={`${match.url}`}     exact render={(routeProps)=> (      <UserGrid  {...routeProps} {...this.props} userData={this.props.userReducer} edit={this.editRecord} delete ={this.deleteRecord}/>) }/>
+               <Route  path={`${match.url}/save`}      render={(routeProps)=> (       <UserForm userData={this.props.userReducer} {...this.props} onSubmit={this.submitForms} resetForm={this.resetForm}/> ) }/>
+            
+            
+            </Switch>  
+            
+          </div>
+
+         </Router> 
+         
       </div>
     );
   }
 }
+/*
+ <UserGrid userData={this.props.userReducer} edit={this.editRecord} delete ={this.deleteRecord}/>
+  
+          <UserForm userData={this.props.userReducer} onSubmit={this.submitForms} resetForm={this.resetForm}/>
+   
 
+*/ 
 
 
 
