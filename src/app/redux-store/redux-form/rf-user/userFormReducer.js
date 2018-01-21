@@ -1,5 +1,6 @@
 import _ from 'lodash';
-
+import axios from 'axios';
+import {AUTH_URL} from '../../../components/components-lib/URL_DETAILS';
 
 const userFormReducer = (state={
     user : {  age :'' , username : '',firstName: '', lastName : '' ,email :'',tcode :'create',isEdit : false},
@@ -53,6 +54,19 @@ const userFormReducer = (state={
          state= {...state, user:{  age :'' , username : '',firstName: '', lastName : '' ,email :'',tcode :'create'}}
          
          break;
+
+         case 'AUTH_SAVE_USER' :
+              console.log('Start User Save')
+
+                      console.log(`${AUTH_URL}/auth/saveuser`)
+              axios.post(`${AUTH_URL}/auth/saveuser`,action.user)
+                   .then(res=>{
+                         console.log('Done User Save')
+                   })
+                   ;
+
+            console.log('Done Save..!')
+             break;
 
     }
 

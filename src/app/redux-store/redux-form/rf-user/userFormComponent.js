@@ -89,9 +89,11 @@ const mapStateToProps =(state)=>{
 
 const mapDispatchToPros=(dispatch)=>{
 return {
-  saveUser  : (newUser)=> {
-    dispatch({type: 'SAVE_USER', user : newUser });
-  },
+  saveUser  : (newUser)=> {  dispatch({type: 'AUTH_SAVE_USER', user : newUser })
+                            ;
+                            },
+  
+  
   deleteUser :(userid)=>{ dispatch({type :'DELETE_USER',value:userid});},
   fetchUser :(userid)=>{ dispatch({type :'FETCH_USER',value:userid});},
   resetForm :(userid)=>{ dispatch({type :'RESET_FORM',value:'RESET'});}

@@ -9,9 +9,10 @@ import { createStore ,applyMiddleware } from 'redux';
 import reducers from './redux-store/appreducers';
 
 import  logger from 'redux-logger';
+import thunk from 'redux-thunk';
 
 
-let store = createStore(reducers,{},applyMiddleware(logger));
+let store = createStore(reducers,{},applyMiddleware(logger,thunk));
 
 //let store = createStore(reducers);
 
