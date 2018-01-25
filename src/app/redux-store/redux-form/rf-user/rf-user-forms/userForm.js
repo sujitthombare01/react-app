@@ -27,8 +27,9 @@ let UserForm =(props) =>{
   const { handleSubmit, pristine, reset, submitting } = props;
   const { user,userList } =props.userData;
   const {history,match} =props;
-  //console.log(user.isEdit);
-  console.log(match);
+  console.log('IN USER FORM');
+  console.log(match.params.userid);
+
       return (
  
         <div>
@@ -76,7 +77,7 @@ let UserForm =(props) =>{
                     <button type="button" className='btn btn-primary btn-sm'  onClick={()=>{props.fetchAllUsers({clnt:4500,lang:'EN'}) }}>Clear</button>  
                   </div>
                   <div className='col-sm-3 col-md-3'>
-                    <button type="button" className='btn btn-primary btn-sm'  onClick={()=>{ let url =match.url.replace('/save','');     history.push(url)}}>Back</button>  
+                    <button type="button" className='btn btn-primary btn-sm'  onClick={()=>{ props.fetchAllUsers({clnt:4500,lang:'EN'}); let url =match.url.replace('/save','');     history.push(url)}}>Back</button>  
                   </div>
       </div>
               </form>

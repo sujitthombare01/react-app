@@ -10,7 +10,7 @@ import {withRouter} from 'react-router';
 let UserGrid = props =>{
     const { user,userList } =props.userData;
     const {history,match} = props;
-  console.log(props.userData)
+  
 return(
 
     <div>
@@ -25,11 +25,11 @@ return(
                 {
                   Header: "Edit",
                   accessor: "username",
-                  Cell : (row)=>(<input type='button' class='btn btn-primary btn-sm' onClick={()=>{props.edit(row.value);  history.push(`${match.url}/save`)   }} value='Edit'/>)
+                  Cell : (row)=>(<input type='button' class='btn btn-primary btn-sm' onClick={()=>{ props.saveOrUpdateRoute(history,match.url,'update',row.value)  }} value='Edit'/>)
                 }, {
                   Header: "Delete",
                   accessor: "username",
-                  Cell : (row)=>(<input type='button' class='btn btn-danger btn-sm' onClick={()=>{props.delete(row.value)}} value='Delete'/>)
+                  Cell : (row)=>(<input type='button' class='btn btn-danger btn-sm' onClick={()=>{ props.userTransations({username:row.value,tcode:'delete'})}} value='Delete'/>)
                 },
                 {
                   Header: "First Name",

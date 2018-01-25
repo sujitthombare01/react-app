@@ -8,18 +8,26 @@ console.log('Fetch All user')
             return (dispatch)=>{
             
             
-                axios.get(`${AUTH_URL}/auth/getusers`,{params : data})
-                .then(res=>{
-                        console.log('Done Fetch User')
-                        console.log(res)
-                        dispatch({type: 'FETCH_USERS', users : res.data });
-                    })
-                .catch(err=>{
-                    console.log('Error Fetch User')
-                        console.log(err)
-                });
+             fetchUsersFunc(data,dispatch)
             }
 };
+
+const fetchUsersFunc =(data,dispatch)=>{
+
+    console.log('Fetch all user function')
+
+    axios.get(`${AUTH_URL}/auth/getusers`,{params : data})
+    .then(res=>{
+            console.log('Done Fetch User')
+            console.log(res)
+            dispatch({type: 'FETCH_USERS', users : res.data });
+        })
+    .catch(err=>{
+        console.log('Error Fetch User')
+            console.log(err)
+    });
+
+}
 
 const saveOrUpdateRoute=(history,url,tcode,userid)=>{
 
@@ -29,29 +37,33 @@ const saveOrUpdateRoute=(history,url,tcode,userid)=>{
                     dispatch({type: 'RESET_FORM', payload :{  age :'' , username : '',firstName: '', lastName : '' ,email :'',tcode :'create'}});
                     history.push(`${url}/save`)
                 }
+            else if(tcode==='update')
+                {
+                    dispatch({type: 'RESET_FORM', payload :{  age :'' , username : '',firstName: '', lastName : '' ,email :'',tcode :'create'}});
+                    history.push(`${url}/save/${userid}`)
+                }
+
+
     }
 
 }
 
 
-const saveUser = (newUser)=> {  
-    console.log('Action Save users')
-    console.log(newUser)
-    console.log(`${AUTH_URL}/auth/saveuser`)
-    //dispatch({type: 'SAVE_USER', user : newUser });
+const userTransations = (newUser)=> {  
+    console.log('Action userTransations')
+
     return (dispatch)=>{
-       // dispatch({type: 'SAVE_USER', user : newUser.user });
+ 
 
                 axios.post(`${AUTH_URL}/auth/saveuser`,newUser)
                     .then(res=>{
-                            console.log('Done User Save')
+                            console.log('Done User Transation')
                             console.log(res)
-                            fetchAllUsers({clnt:4500,lang:'EN'})
-                           // dispatch({type: 'RESET_FORM', payload :{  age :'' , username : '',firstName: '', lastName : '' ,email :'',tcode :'create'}});
-                   
+                            fetchUsersFunc({clnt:4500,lang:'EN'},dispatch)
+                          
                         })
                      .catch(err=>{
-                        console.log('Error User Save')
+                        console.log('Error User Transation')
                         console.log(res)
                         dispatch({type: 'RESET_FORM', payload :newUser});
                    
@@ -61,4 +73,4 @@ const saveUser = (newUser)=> {
 }
 
 
-export { fetchAllUsers ,saveUser ,saveOrUpdateRoute}
+export { fetchAllUsers ,userTransations ,saveOrUpdateRoute}

@@ -10,7 +10,7 @@ import _ from 'lodash';
 
 import {BrowserRouter as Router , Route ,Link} from 'react-router-dom';
 import { Switch} from 'react-router';
-import {fetchAllUsers,saveUser,saveOrUpdateRoute} from './rf-user-forms/userActions'
+import {fetchAllUsers,userTransations,saveOrUpdateRoute} from './rf-user-forms/userActions'
 
 
 class UserFormComponent extends Component {
@@ -19,28 +19,16 @@ class UserFormComponent extends Component {
  
   }
 
- renderField = field =>{
-    return (<input type='text' {...field.input} />);
-  } 
 
  
 submitForms = values =>{ 
  
-  this.props.saveUser(values.user);
+  this.props.userTransations(values.user);
 
 };
 
-editRecord = value =>{
-  console.log('Edit Record')
-  this.props.fetchUser(value);
 
-}
 
-deleteRecord = value =>{
-  console.log('Delete Record')
-  console.log(value)
-  this.props.deleteUser(value);
-}
 
 resetForm=() =>{
   this.props.resetForm('RESET');
@@ -50,7 +38,8 @@ resetForm=() =>{
 
 
 componentDidMount(){
- this.props.fetchAllUsers({clnt:4500,lang:'EN'});
+
+          this.props.fetchAllUsers({clnt:4500,lang:'EN'});
   }
 
   render() {
@@ -63,7 +52,8 @@ const {match} = this.props;
 
             <Switch>
                <Route  path={`${match.url}`}     exact render={(routeProps)=> (      <UserGrid  {...routeProps} {...this.props} userData={this.props.userReducer} edit={this.editRecord} delete ={this.deleteRecord}/>) }/>
-               <Route  path={`${match.url}/save`}      render={(routeProps)=> (       <UserForm userData={this.props.userReducer} {...this.props} onSubmit={this.submitForms.bind(this)} resetForm={this.resetForm}/> ) }/>
+               <Route  path={`${match.url}/save`}   exact   render={(routeProps)=> (       <UserForm userData={this.props.userReducer} {...this.props} onSubmit={this.submitForms.bind(this)} resetForm={this.resetForm}/> ) }/>
+               <Route  path={`${match.url}/save/:userid`}      render={(routeProps)=> (       <UserForm userData={this.props.userReducer} {...this.props} onSubmit={this.submitForms.bind(this)} resetForm={this.resetForm}/> ) }/>
             
             
             </Switch>  
@@ -89,21 +79,6 @@ const mapStateToProps =(state)=>{
 
 
 
-const mapDispatchToPros=(dispatch)=>{
-return {
-  saveUser ,
-  
-  
-  deleteUser :(userid)=>{ dispatch({type :'DELETE_USER',value:userid});},
-  fetchUser :(userid)=>{ dispatch({type :'FETCH_USER',value:userid});},
-  resetForm :(userid)=>{ dispatch({type :'RESET_FORM',value:'RESET'});},
-  fetchAllUsers
-     
-}
-
-};
-
-//export default connect(mapStateToProps,mapDispatchToPros)(UserFormComponent);
 
 
-export default connect(mapStateToProps,{saveUser,fetchAllUsers,saveOrUpdateRoute})(UserFormComponent);
+export default connect(mapStateToProps,{userTransations,fetchAllUsers,saveOrUpdateRoute})(UserFormComponent);
