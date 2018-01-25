@@ -10,7 +10,7 @@ import {withRouter} from 'react-router';
 let UserGrid = props =>{
     const { user,userList } =props.userData;
     const {history,match} = props;
-   
+  console.log(props.userData)
 return(
 
     <div>
@@ -18,44 +18,44 @@ return(
              <h2>User Table</h2>
         </div>
         <div className='row'>
-             <input type='button' value='Add User' className='btn btn-primary btn-sm' onClick={()=>{history.push(`${match.url}/save`)}}/>
+             <input type='button' value='Add User' className='btn btn-primary btn-sm' onClick={()=>{ props.saveOrUpdateRoute(history,match.url,'create',null);  }}/>
         </div>
         <div className='row'>
         <ReactTable data={userList} columns={[
                 {
                   Header: "Edit",
-                  accessor: "user.username",
+                  accessor: "username",
                   Cell : (row)=>(<input type='button' class='btn btn-primary btn-sm' onClick={()=>{props.edit(row.value);  history.push(`${match.url}/save`)   }} value='Edit'/>)
                 }, {
                   Header: "Delete",
-                  accessor: "user.username",
+                  accessor: "username",
                   Cell : (row)=>(<input type='button' class='btn btn-danger btn-sm' onClick={()=>{props.delete(row.value)}} value='Delete'/>)
                 },
                 {
                   Header: "First Name",
-                  accessor: "user.firstName"
+                  accessor: "firstName"
                 },{
                     Header: "Last Name",
-                    accessor: "user.lastName"
+                    accessor: "lastName"
                   },{
                     Header: "User Name",
-                    accessor: "user.username"
+                    accessor: "username"
                   },
                   {
                     Header: "Age",
-                    accessor: "user.age"
+                    accessor: "age"
                   },{
                     Header: "Email",
-                    accessor: "user.email"
+                    accessor: "email"
                   }]} 
                   defaultPageSize={5}
-                  SubComponent={row => {
+                  SubComponent={table => {
                     
                     return (
 
                       <div style={{ padding: "20px" }}>
                         <em>
-                        First Name  : {row.row['user.firstName']}
+                        First Name  : {table.row['firstName']}
                         </em>
                     </div> )}}
                  

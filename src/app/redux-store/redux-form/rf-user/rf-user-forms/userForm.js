@@ -58,13 +58,13 @@ let UserForm =(props) =>{
                 <div className='form-group row'>
                      <label htmlFor="email" className="col-md-2 col-form-label"> Email</label>   
                                    
-                     <Field name="user.email" component={renderField} type="text"  validate={[ required,email] }/>
+                     <Field name="user.email" component={renderField} type="text"  validate={ required }/>
                      
                 </div>
                 <div className='form-group row'>
                      <label htmlFor="age" className="col-md-2 col-form-label"> Age </label>   
                                    
-                     <Field name="user.age" component={renderField} type="text" validate={ [required,number,minValue18] } />
+                     <Field name="user.age" component={renderField} type="text" validate={ required } />
                      <Field name="user.tcode" component='input' type="hidden" />
                      
                 </div>
@@ -73,7 +73,7 @@ let UserForm =(props) =>{
                     <button type="submit" className='btn btn-primary btn-sm' disabled={submitting}>Submit</button>
                  </div> 
                  <div className='col-sm-3 col-md-3'>
-                    <button type="button" className='btn btn-primary btn-sm'  onClick={()=>{props.resetForm();}}>Clear</button>  
+                    <button type="button" className='btn btn-primary btn-sm'  onClick={()=>{props.fetchAllUsers({clnt:4500,lang:'EN'}) }}>Clear</button>  
                   </div>
                   <div className='col-sm-3 col-md-3'>
                     <button type="button" className='btn btn-primary btn-sm'  onClick={()=>{ let url =match.url.replace('/save','');     history.push(url)}}>Back</button>  
@@ -108,11 +108,6 @@ let UserForm =(props) =>{
     
   })( UserForm) ;
 
-
-UserForm = connect(
-    state => ({ initialValues: state.userFormReducer } ),
-    null    
-  )(UserForm);
 
   
 

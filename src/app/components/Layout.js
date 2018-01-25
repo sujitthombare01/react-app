@@ -18,9 +18,19 @@ class Layout extends React.Component {
     this.props.setName('Anna');
   }
 
+  render()  {
+    return (
+        <div className='container'>
+        <div className="container-fluid">
+          Hello
+          </div>
+  
+        </div>
+    );
+  }
+  }
 
-
-
+/*
 
   render()  {
   return (
@@ -70,6 +80,8 @@ class Layout extends React.Component {
   );
 }
 }
+
+*/
 
 const mapStateToProps =(state)=>{
 
